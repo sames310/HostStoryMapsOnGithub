@@ -49,9 +49,7 @@ define(["dojo/topic",
 						if (layer.url.indexOf('World') == -1) {
 							app.map.removeLayer(layer);
 						}
-						else{
-							app.map.removeLayer(layer);
-						}
+						
 					}
 				}
 				
