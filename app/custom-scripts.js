@@ -46,9 +46,9 @@ define(["dojo/topic",
 				function RemoveAllExceptBasemap(){
 					for (var j = app.map.graphicsLayerIds.length-1; j>=0;  j--){
 						var layer = app.map.getLayer(app.map.graphicsLayerIds[j])
-						if (layer.url.indexOf('World') == -1) {
+						
 							app.map.removeLayer(layer);
-						}
+						
 						
 					}
 				}
