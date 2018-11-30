@@ -28,10 +28,10 @@ define(["dojo/topic",
 					_fadeLayer = new FeatureLayer("https://services.arcgis.com/WgElToYhbLt94zKA/ArcGIS/rest/services/KeyDevelopmentOpportunities/FeatureServer/1")
 				}
 				else if ($(this).index() === 2){
-					_fadeLayer = new FeatureLayer("http://gisdata5.geotg.net/arcgis/rest/services/Mississauga/InternalApp_BoundlessDevelopmentOpportunities/MapServer/18")
+					_fadeLayer = new FeatureLayer("https://services.arcgis.com/WgElToYhbLt94zKA/arcgis/rest/services/VacantLand/FeatureServer/2")
 				}
 				else{
-					_fadeLayer = new FeatureLayer("http://gisdata5.geotg.net/arcgis/rest/services/Mississauga/InternalApp_BoundlessDevelopmentOpportunities/MapServer/29")
+					_fadeLayer = new FeatureLayer("https://services.arcgis.com/WgElToYhbLt94zKA/ArcGIS/rest/services/VacantLand/FeatureServer/3")
 				}
 				$("#item-runner").animate({
 					"left": pos
