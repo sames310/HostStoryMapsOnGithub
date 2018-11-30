@@ -1,4 +1,8 @@
-define(["dojo/topic"], function(topic) {
+define(["dojo/topic",
+		"esri/map",
+		"esri/layout",
+		"esri/widgets",
+		"esri/layers/FeatureLayer"], function(topic,Map,layout,widgets,FeatureLayer) {
   /*
    * Custom Javascript to be executed while the application is initializing goes here
    */
@@ -8,6 +12,8 @@ define(["dojo/topic"], function(topic) {
     /*
      * Custom Javascript to be executed when the application is ready goes here
      */
+
+	 
 	 $(".selector-background").click(function(){
 				var pos = $(this).position().left;
 				var selection = $(this).index();
@@ -16,16 +22,16 @@ define(["dojo/topic"], function(topic) {
 					$("#").addClass("active");
 				}
 				if($(this).index() === 0){
-					_fadeLayer = "less_than_15"
+					_fadeLayer = new FeatureLayer("https://services.arcgis.com/WgElToYhbLt94zKA/arcgis/rest/services/PlanningFramework/FeatureServer/0")
 				}
 				else if ($(this).index() === 1){
-					_fadeLayer = "less_than_30"
+					_fadeLayer = new FeatureLayer("https://services.arcgis.com/WgElToYhbLt94zKA/ArcGIS/rest/services/KeyDevelopmentOpportunities/FeatureServer/1")
 				}
 				else if ($(this).index() === 2){
-					_fadeLayer = "less_than_45"
+					_fadeLayer = new FeatureLayer("http://gisdata5.geotg.net/arcgis/rest/services/Mississauga/InternalApp_BoundlessDevelopmentOpportunities/MapServer/18")
 				}
 				else{
-					_fadeLayer = "greater_than_45"
+					_fadeLayer = new FeatureLayer("http://gisdata5.geotg.net/arcgis/rest/services/Mississauga/InternalApp_BoundlessDevelopmentOpportunities/MapServer/29")
 				}
 				$("#item-runner").animate({
 					"left": pos
@@ -37,14 +43,23 @@ define(["dojo/topic"], function(topic) {
 					}
 				},100);
 
-				var layers = [];
-				var lyr = getLayerByName(app.maps[0],_fadeLayer,true,false);
-				layers = layers.concat(lyr);
+				function RemoveAllExceptBasemap(){
+					for (var j = app.map.graphicsLayerIds.length-1; j>=0;  j--){
+						var layer = app.map.getLayer(app.map.graphicsLayerIds[j])
+						if (layer.url.indexOf('World') == -1) {
+							app.map.removeLayer(layer);
+						}
+					}
+				}
+				
+				RemoveAllExceptBasemap();		
+				
+				app.map.addLayer(_fadeLayer);
+				
 
-				fadeLayers(layers);
-
-				syncPopup();
 			});
 
+			
+			
   });
 });
